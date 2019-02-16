@@ -1,0 +1,9 @@
+- name: fontawesome
+  crossorigin: anonymous
+  integrity: sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr
+  path: use.fontawesome.com/releases/v5.7.2/css/all.css
+- name: atom-one-dark-reasonable
+  crossorigin: anonymous
+  integrity: sha256-K3aXfTeK81xELDIVQdbmzCE/lkh8ehlUCsEUV7HfRTg=
+  path: cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/atom-one-dark-reasonable.min.css
+

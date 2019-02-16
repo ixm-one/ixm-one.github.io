@@ -1,0 +1,4 @@
+- name: hljs
+  crossorigin: anonymous
+  integrity: sha256-sNPiigbfSkqUzMc5rgrdztLnneCMAp6W9wetJUZu9Zw= 
+  path: cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js

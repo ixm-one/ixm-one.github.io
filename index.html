@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="author" content="Isabella Muerte">
+    <title>Izzy's eXtension Modules</title>
+    <!--{% for item in site.data.css %}
+      <link rel="stylesheet"
+            href="{{item.path}}"
+            {% if item.crossorigin %}crossorigin="{{item.crossorigin}}">{% endif %}
+            {% if item.integrity %}integrity="{{item.integrity}}"{% endif %}
+    {% endfor %}
+    {% for item in site.data.js %}
+      <script src="{{item.path}}"
+        {% if item.crossorigin %}crossorigin="{{item.crossorigin}}">{% endif %}
+        {% if item.integrity %}integrity="{{item.integrity}}"{% endif %}
+      </script>
+      {% endfor %}-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/atom-one-dark-reasonable.min.css" crossorigin="anonymous" integrity="sha256-K3aXfTeK81xELDIVQdbmzCE/lkh8ehlUCsEUV7HfRTg=">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js" crossorigin="anonymous" integrity="sha256-sNPiigbfSkqUzMc5rgrdztLnneCMAp6W9wetJUZu9Zw="></script>
+    <script type="module" defer>
+      /* This is all a bit of a hack, but oh well */
+      hljs.registerLanguage('ixm', function (hljs) {
+        return {
+          k: {
+            "function": "FetchContent_MakeAvailable FetchContent_Declare",
+            "built_in": "FetchContent",
+            "keyword": "include cmake_minimum_required",
+            "literal": "VERSION URL",
+            "variable": "ixm",
+
+          },
+          c: [hljs.NM, hljs.HCM, hljs.QSM]
+        }
+      });
+      hljs.initHighlighting();
+    </script>
+    <style>
+      ::selection { background-color: #ffe9b3; }
+      header, article, footer {
+        display: grid;
+        grid-template-rows: auto;
+        font-size: 1.6vmax;
+        justify-items: center;
+      }
+      body { color: #3b4351; }
+      main > header {
+        display: grid;
+        grid-template-columns: auto;
+        justify-items: center;
+      }
+      pre { white-space: pre-line; }
+      code {
+        border-left: .5rem solid #2d6da3;
+        margin: 0 auto;
+        box-shadow: 0 2px 5px 0 rgba(48, 55, 66, .5);
+        overflow-x: auto;
+        font-family: 'Fira Code';
+        font-weight: bold;
+      }
+      ul {
+        grid-column: 1/-1;
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding-left: 0;
+      }
+      li {
+        display: inline;
+        width: 2.5em;
+        text-align: center;
+        font-size: 3em;
+      }
+      a { text-decoration: none; color: #3b4351; }
+      a:hover { color: #000000; }
+   </style>
+  </head>
+  <body>
+    <header>
+      <img width="256" height="256" src="logo.png">
+      <small>The <em>last</em> CMake library you'll ever use</small>
+    </header>
+    <main>
+      <header>
+        <ul>
+          <li>
+            <a rel="noopener noreferrer"
+               target="_blank"
+               title="GitHub"
+               href="https://github.com/ixm/ixm">
+              <span class="fab fa-github"></span>
+            </a>
+          </li>
+          <li>
+            <a rel="noopener noreferrer"
+               target="_blank"
+               title="Documentation"
+               href="https://docs.ixm.one">
+              <span class="fas fa-book"></span>
+            </a>
+          </li>
+        </ul>
+      </header>
+      <article>
+        <pre><code class="language-ixm hljs"># Import IXM in as little as 4 lines of code!
+            cmake_minimum_required(VERSION 3.14)
+            include(FetchContent)
+            FetchContent_Declare(ixm URL "https://get.ixm.one")
+            FetchContent_MakeAvailable(ixm)
+        </code></pre>
+      </article>
+    </main>
+    <footer><span class="far fa-copyright"> Isabella Muerte</footer>
+  </body>
+</html>
