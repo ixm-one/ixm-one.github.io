@@ -1,3 +1,5 @@
 title: ixm.one
 description: Izzy's eXtension Modules
 show_downloads: false
+sass:
+  style: compressed

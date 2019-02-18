@@ -24,7 +24,7 @@
               integrity="{{item.integrity}}"
             {% endif %}>
     {% endfor %}
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
     {% for item in site.data.js %}
       <script src="//{{item.path}}"
         {% if item.crossorigin %}crossorigin="{{item.crossorigin}}">{% endif %}
@@ -32,26 +32,14 @@
       </script>
     {% endfor %}
     <script type="module" defer>
-      /* This is all a bit of a hack, but oh well */
-      hljs.registerLanguage('ixm', function (hljs) {
-        return {
-          k: {
-            "function": "FetchContent_MakeAvailable FetchContent_Declare",
-            "built_in": "FetchContent",
-            "keyword": "include cmake_minimum_required",
-            "literal": "VERSION URL",
-            "variable": "ixm",
-
-          },
-          c: [hljs.NM, hljs.HCM, hljs.QSM]
-        }
-      });
+      import {ixm} from "/assets/js/site.js";
+      ixm(hljs);
       hljs.initHighlighting();
     </script>
   </head>
   <body>
     <header>
-      <img src="logo.png">
+      <img src="/assets/img/logo.png">
       <h1>The <em>last</em> CMake library you'll ever use</h1>
     </header>
     <nav>
@@ -62,7 +50,7 @@
                target="_blank"
                title="{{item.name}}"
                href="https://{{item.path}}">
-              <span class="{{item.type}}"></span>
+              <span class="fa-fw {{item.type}}"></span>
             </a>
           </li>
         {% endfor %}
@@ -71,9 +59,14 @@
     <main>
       <figure>
         <pre><code class="language-ixm hljs">{% include install.cmake %}</code></pre>
-      <figcaption>Import IXM with as little as 4 lines of code!</figcaption>
+        <figcaption>
+          Import IXM with just <strong>4 lines of code!</strong>
+        </figcaption>
       </figure>
     </main>
-    <footer><span class="far fa-copyright"></span>Isabella Muerte</footer>
+    <footer>
+      <span class="fa-fw far fa-copyright"></span>
+      <a href="https://twitter.com/slurpsmadrips">Isabella Muerte</a>
+    </footer>
   </body>
 </html>
