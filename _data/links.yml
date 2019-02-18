@@ -1,0 +1,6 @@
+- name: GitHub
+  path: github.com/slurps-mad-rips/ixm
+  type: fab fa-github
+- name: Documentation
+  path: docs.ixm.one
+  type: fas fa-book

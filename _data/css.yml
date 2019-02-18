@@ -6,4 +6,7 @@
   crossorigin: anonymous
   integrity: sha256-K3aXfTeK81xELDIVQdbmzCE/lkh8ehlUCsEUV7HfRTg=
   path: cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/atom-one-dark-reasonable.min.css
-
+- name: fira-code
+  path: cdn.jsdelivr.net/npm/firacode@1/distr/fira_code.min.css
+- name: google-fonts
+  path: fonts.googleapis.com/css?family=Open+Sans:400,400i
