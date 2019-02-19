@@ -1,6 +1,6 @@
 - name: GitHub
   path: github.com/slurps-mad-rips/ixm
-  type: fab fa-github
+  code: eab0
 - name: Documentation
   path: docs.ixm.one
-  type: fas fa-book
+  code: e920

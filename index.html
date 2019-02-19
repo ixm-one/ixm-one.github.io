@@ -1,41 +1,27 @@
 ---
 ---
+{%- include vars.html -%}
 <!DOCTYPE html>
 <html lang="en-US" prefix="og: http://ogp.me/ns#">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    {% for item in site.data.meta %}
+    {%- for item in site.data.meta -%}
       <meta name="{{item[0]}}" content="{{item[1]}}">
-    {% endfor %}
-    {% for item in site.data.twitter %}
+    {%- endfor -%}
+    {%- for item in site.data.twitter -%}
       <meta name="twitter:{{item[0]}}" content="{{item[1]}}">
-    {% endfor %}
-    {% for item in site.data.opengraph %}
+    {%- endfor -%}
+    {%- for item in site.data.opengraph -%}
       <meta property="og:{{item[0]}}" content="{{item[1]}}">
-    {% endfor %}
+    {%- endfor -%}
     <title>Izzy's eXtension Modules</title>
-    {% for item in site.data.css %}
-      <link rel="stylesheet" href="//{{ item.path }}"
-            {% if item.crossorigin %}
-              crossorigin="{{item.crossorigin}}"
-            {% endif %}
-            {% if item.integrity %}
-              integrity="{{item.integrity}}"
-            {% endif %}>
-    {% endfor %}
+    {%- for item in site.data.css -%}
+      <link rel="stylesheet" href="//{{ item.path -}}"
+        {%- if item.crossorigin %} crossorigin="{{item.crossorigin}}"{% endif -%}
+        {%- if item.integrity %} integrity="{{item.integrity}}"{% endif -%}>
+    {%- endfor -%}
     <link rel="stylesheet" href="/assets/css/main.css">
-    {% for item in site.data.js %}
-      <script src="//{{item.path}}"
-        {% if item.crossorigin %}crossorigin="{{item.crossorigin}}">{% endif %}
-        {% if item.integrity %}integrity="{{item.integrity}}"{% endif %}>
-      </script>
-    {% endfor %}
-    <script type="module" defer>
-      import {ixm} from "/assets/js/site.js";
-      ixm(hljs);
-      hljs.initHighlighting();
-    </script>
   </head>
   <body>
     <header>
@@ -44,29 +30,29 @@
     </header>
     <nav>
       <ul>
-        {% for item in site.data.links %}
+        {%- for item in site.data.links -%}
+          {%- capture link %}{% include link.html item=item %}{% endcapture -%}
           <li>
-            <a rel="noopener noreferrer"
-               target="_blank"
-               title="{{item.name}}"
-               href="https://{{item.path}}">
-              <span class="fa-fw {{item.type}}"></span>
-            </a>
+            {{- link | strip_newlines -}}
           </li>
-        {% endfor %}
+        {%- endfor -%}
       </ul>
     </nav>
     <main>
       <figure>
-        <pre><code class="language-ixm hljs">{% include install.cmake %}</code></pre>
+        <pre><code>
+        {{- builtin }}cmake_minimum_required{{end}}({{literal}}VERSION{{end}} {{number}}3.14{{end}})
+        {{builtin}}include{{end}}({{module}}FetchContent{{span}})
+        {{function}}FetchContent_Declare{{end}}({{var}}ixm{{end}} {{literal}}URL{{end}} {{string}}https://get.ixm.one{{end}})
+        {{function}}FetchContent_MakeAvailable{{end}}({{var}}ixm{{end}})
+        </code></pre>
         <figcaption>
           Import IXM with just <strong>4 lines of code!</strong>
         </figcaption>
       </figure>
     </main>
     <footer>
-      <span class="fa-fw far fa-copyright"></span>
-      <a href="https://twitter.com/slurpsmadrips">Isabella Muerte</a>
+      <a href="https://twitter.com/slurpsmadrips">&copy; Izzy Muerte</a>
     </footer>
   </body>
 </html>

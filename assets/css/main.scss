@@ -5,7 +5,20 @@
   --hover-color: #000000;
   --color: #3b4357;
 
+  --code-background: #282c34;
+  --code-color: #abb2bf;
+
+  --code-function: #61aeee;
+  --code-builtin: #f92672;
+  --code-literal: #56b6c2;
+  --code-string: #9ccc65;
+  --code-module: #e6c07b;
+  --code-number: #d19a66;
+  --code-var: #b18eb1;
+
   --icon-size: 3em;
+  --icon-github: "\eab0";
+  --icon-books: "\e920";
 }
 ::selection { background-color: var(--selection-color); }
 body {
@@ -28,7 +41,11 @@ ul {
   padding-left: 0;
   grid-auto-flow: column;
 }
-li { font-size: var(--icon-size); }
+li {
+  font-family: 'icons';
+  font-size: var(--icon-size);
+  width: 1.25em;
+}
 a {
   text-decoration: none;
   color: var(--color);
@@ -42,10 +59,29 @@ pre {
 }
 code {
   border-left: .5rem solid #2d6da3;
-  margin: 0 auto;
+  border-radius: 5px;
   box-shadow: 0 2px 5px 0 rgba(48, 55, 66, .5);
-  overflow-x: auto;
   font-family: 'Fira Code', monospace;
   font-weight: bold;
-}
+  line-height: 1.3em;
+  overflow-x: auto;
+  display: block;
+  padding: 0.5em;
+  margin: 0 auto;
+  background: var(--code-background);
+  color: var(--code-color);
 
+  @each $element in function, builtin, literal, string, module, number, var {
+    & .#{$element} { color: var(--code-#{$element}); }
+  }
+}
+figcaption { font-size: 1.5em; }
+footer { font-size: 1.25em; }
+
+@font-face {
+  font-family: 'icons';
+  src:
+    url('/assets/fonts/icons.ttf') format('truetype'),
+    url('/assets/fonts/icons.woff') format('woff'),
+    url('/assets/fonts/icons.svg') format('svg');
+}
