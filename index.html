@@ -42,7 +42,7 @@
       <figure>
         <pre><code>
         {{- builtin }}cmake_minimum_required{{end}}({{literal}}VERSION{{end}} {{number}}3.14{{end}})
-        {{builtin}}include{{end}}({{module}}FetchContent{{span}})
+        {{builtin}}include{{end}}({{module}}FetchContent{{end}})
         {{function}}FetchContent_Declare{{end}}({{var}}ixm{{end}} {{literal}}URL{{end}} {{string}}https://get.ixm.one{{end}})
         {{function}}FetchContent_MakeAvailable{{end}}({{var}}ixm{{end}})
         </code></pre>
