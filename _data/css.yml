@@ -1,4 +1,4 @@
 - name: fira-code
   path: cdn.jsdelivr.net/npm/firacode@1/distr/fira_code.min.css
-- name: google-fonts
-  path: fonts.googleapis.com/css?family=Open+Sans
+- name: inter
+  path: unpkg.com/inter-ui/inter.css
