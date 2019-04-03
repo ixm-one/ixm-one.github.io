@@ -2,3 +2,6 @@
   path: cdn.jsdelivr.net/npm/firacode@1/distr/fira_code.min.css
 - name: inter
   path: unpkg.com/inter-ui/inter.css
+- name: font-awesome
+  path: cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css
+  integrity: sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=

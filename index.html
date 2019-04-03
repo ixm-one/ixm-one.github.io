@@ -18,8 +18,10 @@
     <title>Izzy's eXtension Modules</title>
     {%- for item in site.data.css -%}
       <link rel="stylesheet" href="//{{ item.path -}}"
-        {%- if item.crossorigin %} crossorigin="{{item.crossorigin}}"{% endif -%}
-        {%- if item.integrity %} integrity="{{item.integrity}}"{% endif -%}>
+      {% if item.integrity %}
+        integrity="{{item.integrity}}"
+        crossorigin="{%- if item.crossorigin %}{{item.crossorigin}}{%- else -%}anonymous{%endif%}"
+      {%- endif -%}>
     {%- endfor -%}
     <link rel="stylesheet" href="/assets/css/main.css">
   </head>
@@ -30,29 +32,67 @@
     </header>
     <nav>
       <ul>
-        {%- for item in site.data.links -%}
-          {%- capture link %}{% include link.html item=item %}{% endcapture -%}
-          <li>
-            {{- link | strip_newlines -}}
-          </li>
-        {%- endfor -%}
+        <li>
+          <a class="fab fa-github"
+             rel="noopener noreferrer" target="_blank"
+             href="https://github.com/ixm-one/ixm"
+             title="GitHub">
+          </a>
+        </li>
+        <li>
+          <a class="fas fa-book"
+             rel="noopener noreferrer"
+             target="_blank"
+             href="https://docs.ixm.one"
+             title="Documentation">
+          </a>
+        </li>
       </ul>
     </nav>
     <main>
-      <figure>
-        <pre><code>
-        {{- builtin }}cmake_minimum_required{{end}}({{literal}}VERSION{{end}} {{number}}3.14{{end}})
-        {{builtin}}include{{end}}({{module}}FetchContent{{end}})
-        {{function}}FetchContent_Declare{{end}}({{var}}ixm{{end}} {{literal}}URL{{end}} {{string}}https://get.ixm.one{{end}})
-        {{function}}FetchContent_MakeAvailable{{end}}({{var}}ixm{{end}})
-        </code></pre>
-        <figcaption>
-          Import IXM with just <strong>4 lines of code!</strong>
-        </figcaption>
-      </figure>
+      <section>
+        <ul>
+          <li><a class="fas fa-chevron-circle-left" href="#" onclick="prev()"></a></li>
+          <li>Import IXM with just <strong>4 lines of code!</strong></li>
+          <li>Automatically generate your projects with blueprints!</li>
+          <li>Have key value pairs by using the <code>dict()</code> type!</li>
+          <li>Download and use external dependencies with ease!</li>
+          <li>Implement <code>find_package()</code> files with little effort!</li>
+          <li><a class="fas fa-chevron-circle-right" href="#" onclick="next()"></a></li>
+        </ul>
+      </section>
+      <section>
+        <ul>
+          <li><pre><code>{% include import.html %}</code></pre></li>
+          <li><pre><code>{% include blueprint.html %}</code></pre></li>
+          <li><pre><code>{% include dict.html %}</code></pre></li>
+          <li><pre><code>{% include fetch.html %}</code></pre></li>
+          <li><pre><code>{% include find.html %}</code></pre></li>
+        </ul>
+      </section>
     </main>
     <footer>
-      <a href="https://twitter.com/slurpsmadrips">&copy; Izzy Muerte</a>
+      <a href="https://twitter.com/slurpsmadrips"><small>&copy; Isabella Muerte</small></a>
     </footer>
+    <script>
+      let current = 0;
+      function next () { switchTo(current += 1); }
+      function prev () { switchTo(current -= 1); }
+      function switchTo (idx) {
+        const slideSelector = 'main > section:last-of-type > ul > li';
+        const descSelector = 'main > section:first-of-type > ul > li';
+        let slides = Array.from(document.querySelectorAll(slideSelector));
+        let descs = Array.from(document.querySelectorAll(descSelector)).slice(1, -1);
+        if (idx < 0) { current = slides.length - 1; }
+        else if (idx >= slides.length) { current = 0; }
+        else { current = idx; }
+        const hide = (element) => { element.style.display = 'none'; };
+        const reset = (element) => { element.style.display = 'initial'; }
+        slides.forEach(hide);
+        descs.forEach(hide);
+        reset(slides[current])
+        reset(descs[current])
+      }
+    </script>
   </body>
 </html>

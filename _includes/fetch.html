@@ -1,0 +1,6 @@
+<function>dict</function>(<literal>SET</literal> <var>ixm::fetch::catch</var>
+&nbsp;&nbsp;<var>OPTIONS</var>
+&nbsp;&nbsp;&nbsp;&nbsp;<string>CATCH_BUILD_TESTING</string> <number>OFF</number>
+&nbsp;&nbsp;&nbsp;&nbsp;<string>CATCH_ENABLE_WERROR</string> <number>OFF</number>)
+<mark><function>fetch</function>(<literal>HUB</literal>{<var>catchorg/Catch2@2.7.0</var>} <literal>ALIAS</literal> <var>catch</var>)</mark>
+<builtin>target_link_libraries</builtin>(<var>my-target</var> <literal>PRIVATE</literal> <var>catch::catch</var>)

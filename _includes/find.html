@@ -1,0 +1,9 @@
+<builtin>list</builtin>(<literal>APPEND</literal> <var>versions</var> <number>9 8 7 6.0 5.0</number>)
+
+<builtin>list</builtin>(<literal>TRANSFORM</literal> <var>versions</var> <literal>PREPEND</literal> <string>clang-format-</string> <literal>OUTPUT_VARIABLE</literal> <var>format-names</var>)
+<builtin>list</builtin>(<literal>TRANSFORM</literal> <var>versions</var> <literal>PREPEND</literal> <string>clang-check-</string> <literal>OUTPUT_VARIABLE</literal> <var>check-names</var>)
+<builtin>list</builtin>(<literal>TRANSFORM</literal> <var>versions</var> <literal>PREPEND</literal> <string>clang-tidy-</string> <literal>OUTPUT_VARIABLE</literal> <var>tidy-names</var>)
+
+<function>find</function>(<literal>PROGRAM</literal> <var>${format-names}</var> <literal>COMPONENT</literal> <var>Format</var>)
+<function>find</function>(<literal>PROGRAM</literal> <var>${check-names}</var> <literal>COMPONENT</literal> <var>Check</var>)
+<function>find</function>(<literal>PROGRAM</literal> <var>${tidy-names}</var> <literal>COMPONENT</literal> <var>Tidy</var>)
