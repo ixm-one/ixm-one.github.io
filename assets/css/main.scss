@@ -1,7 +1,5 @@
 ---
 ---
-$samples: 4;
-
 :root {
   --selection-color: #ffe9b4;
   --hover-color: #000000;
@@ -56,6 +54,7 @@ code {
 
 main {
   display: grid;
+  font-size: x-small;
   section {
     grid-column: 3;
     &:first-of-type {
@@ -67,9 +66,12 @@ main {
         }
       }
       li {
-        min-width: 500px;
+        min-width: 35vmin;
         &:last-of-type,&:nth-of-type(2) { display: initial; }
-        &:first-of-type,&:last-of-type { min-width: auto; }
+        &:first-of-type,&:last-of-type {
+          min-width: auto;
+          max-width: auto;
+        }
         a { font-size: xx-large; }
       }
     }
