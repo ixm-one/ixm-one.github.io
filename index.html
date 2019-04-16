@@ -24,74 +24,102 @@
       {%- endif -%}>
     {%- endfor -%}
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="shortcut icon" href="/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   </head>
   <body>
     <header>
       <img src="/assets/img/logo.png">
-      <h1>The <em>last</em> CMake library you'll ever use</h1>
+      <h1>
+        <span class="green">I</span>zzy's
+        e<span class="red">X</span>tension
+        <span class="blue">M</span>odules
+      </h1>
+      <p>The <em>last</em> CMake library you'll ever use</p>
+      <nav>
+        <ul>
+          <li>
+            <a class="fab fa-github"
+               rel="noopener noreferrer" target="_blank"
+               href="https://github.com/ixm-one/ixm"
+               title="GitHub">
+            </a>
+          </li>
+          <li>
+            <a class="fas fa-book"
+               rel="noopener noreferrer"
+               target="_blank"
+               href="https://docs.ixm.one"
+               title="Documentation">
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
-    <nav>
-      <ul>
-        <li>
-          <a class="fab fa-github"
-             rel="noopener noreferrer" target="_blank"
-             href="https://github.com/ixm-one/ixm"
-             title="GitHub">
-          </a>
-        </li>
-        <li>
-          <a class="fas fa-book"
-             rel="noopener noreferrer"
-             target="_blank"
-             href="https://docs.ixm.one"
-             title="Documentation">
-          </a>
-        </li>
-      </ul>
-    </nav>
     <main>
-      <section>
+        <a class="fas fa-chevron-circle-left" onclick="prev()"></a>
         <ul>
-          <li><a class="fas fa-chevron-circle-left" onclick="prev()"></a></li>
-          <li>Import IXM with just <strong>4 lines of code!</strong></li>
-          <li>Automatically generate your projects with blueprints!</li>
-          <li>Have key value pairs by using the <code>dict()</code> type!</li>
-          <li>Download and use external dependencies with ease!</li>
-          <li>Implement <code>find_package()</code> files with little effort!</li>
-          <li><a class="fas fa-chevron-circle-right" onclick="next()"></a></li>
+          <li data-visible>
+            <figure>
+              <pre><code>{% include import.html %}</code></pre>
+              <figcaption>Import IXM with just <strong>4 lines of code!</strong></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <pre><code>{% include blueprint.html %}</code></pre>
+              <figcaption>
+                Automatically generate your projects with blueprints!
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <pre><code>{% include dict.html %}</code></pre>
+              <figcaption>
+                Have key value pairs by using the <code>dict()</code> type!
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <pre><code>{% include fetch.html %}</code></pre>
+              <figcaption>
+                Download and use external dependencies with ease!
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <pre><code>{% include find.html %}</code></pre>
+              <figcaption>
+                Implement <code>find_package()</code> files with little effort!
+              </figcaption>
+            </figure>
+          </li>
         </ul>
-      </section>
-      <section>
-        <ul>
-          <li><pre><code>{% include import.html %}</code></pre></li>
-          <li><pre><code>{% include blueprint.html %}</code></pre></li>
-          <li><pre><code>{% include dict.html %}</code></pre></li>
-          <li><pre><code>{% include fetch.html %}</code></pre></li>
-          <li><pre><code>{% include find.html %}</code></pre></li>
-        </ul>
-      </section>
+        <a class="fas fa-chevron-circle-right" onclick="next()"></a>
     </main>
     <footer>
-      <a href="https://twitter.com/slurpsmadrips"><small>&copy; Isabella Muerte</small></a>
+      <a href="https://twitter.com/slurpsmadrips">
+        <small class="far fa-copyright">Isabella Muerte</small>
+      </a>
     </footer>
     <script>
       let current = 0;
       function next () { switchTo(current += 1); }
       function prev () { switchTo(current -= 1); }
       function switchTo (idx) {
-        const slideSelector = 'main > section:last-of-type > ul > li';
-        const descSelector = 'main > section:first-of-type > ul > li';
+        const slideSelector = 'main > ul > li';
         let slides = Array.from(document.querySelectorAll(slideSelector));
-        let descs = Array.from(document.querySelectorAll(descSelector)).slice(1, -1);
         if (idx < 0) { current = slides.length - 1; }
         else if (idx >= slides.length) { current = 0; }
         else { current = idx; }
-        const hide = (element) => { element.style.display = 'none'; };
-        const reset = (element) => { element.style.display = 'initial'; }
+        const hide = (element) => { delete element.dataset['visible']; };
+        const show = (element) => { element.dataset['visible'] = true; }
         slides.forEach(hide);
-        descs.forEach(hide);
-        reset(slides[current])
-        reset(descs[current])
+        show(slides[current])
       }
     </script>
   </body>

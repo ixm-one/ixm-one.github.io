@@ -1,39 +1,74 @@
 ---
 ---
+
+$text-font: 'Inter', sans-serif;
+$code-font: 'Fira Code', monospace;
+$icon-font: 'Font Awesome 5 Free';
+
+$black: #1b1f23;
+$black-85: rgba($black, .85);
+$black-75: rgba($black, .75);
+
+$green: #9ccc65;
+$blue: #61aeee;
+$red: #f92672;
+
+@mixin coord ($column, $row) {
+  grid: {
+    column: $column;
+    row: $row;
+  }
+}
+
 :root {
   --selection-color: #ffe9b4;
-  --hover-color: #000000;
-  --color: #3b4357;
+  --hover-color: #{$black-85};
+  --color: #{$black-75};
 
-  --code-background: #282c34;
-  --code-color: #abb2bf;
+  --text-green: #{$green};
+  --text-blue: #{$blue};
+  --text-red: #{$red};
 
-  --code-function: #61aeee;
-  --code-builtin: #f92672;
-  --code-literal: #56b6c2;
-  --code-string: #9ccc65;
-  --code-module: #e6c07b;
-  --code-number: #d19a66;
-  --code-var: #b18eb1;
+  --code-background: #fcf2f2;
+  --code-color: #d73e48;
 
-  --icon-size: 3em;
+  --code-block-background: #282c34;
+  --code-block-color: #abb2bf;
+
+  --code-block-function: #{$blue};
+  --code-block-builtin: #{$red};
+  --code-block-literal: #56b6c2;
+  --code-block-string: #{$green};
+  --code-block-module: #e6c07b;
+  --code-block-number: #d19a66;
+  --code-block-var: #b18eb1;
+
+  --icon-size: 27px;
   --icon-github: "\f09b";
   --icon-books: "\f02d";
 }
 
 ::selection { background-color: var(--selection-color); }
 
+.green { color: var(--text-green); }
+.blue { color: var(--text-blue); }
+.red { color: var(--text-red); }
+
 * {
   box-sizing: border-box;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
-  grid-template-rows: auto;
+  grid: {
+    column-gap: 20px;
+    template: {
+      columns: 1fr 2fr 1fr;
+    }
+  }
   display: grid;
   color: var(--color);
-  font-family: 'Inter', sans-serif;
-  text-rendering: optimizeLegibility;
+  font-family: $text-font;
   & > * {
     grid-column: 1 / -1;
     justify-self: center;
@@ -42,73 +77,78 @@ body {
 }
 
 header {
-  img { width: 200px; }
-}
-
-code {
-  background-color: #fcf2f2;
-  color: #d73e48;
-  font-weight: bold;
-  font-family: 'Fira Code', monospace;
+  display: grid;
+  @media not screen and (min-device-width: 320px) and (max-device-width: 720px) {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  * {
+    justify-self: center;
+    &:first-child {
+      justify-self: right;
+      @include coord(1, 1);
+    }
+    &:last-child {
+      justify-self: left;
+      @include coord(3, 1);
+    } 
+  }
+  
+  img {
+    align-self: center;
+    width: 54px;
+  }
+  h1 {
+    margin-bottom: 0;
+    @include coord(2, 2);
+  }
+  p {
+    margin: {
+      bottom: 0;
+      top: .25em;
+    }
+    @include coord(2, 3);
+  }
+  nav {
+    li {
+      font-family: $icon-font;
+      font-size: var(--icon-size);
+      width: 1.25em;
+    }
+  }
 }
 
 main {
   display: grid;
+  grid: {
+    auto-flow: column;
+  }
+  justify-items: center;
+  align-items: center;
   font-size: x-small;
-  section {
-    grid-column: 3;
-    &:first-of-type {
-      ul {
-        display: flex;
-        justify: {
-          self: center;
-          content: center;
-        }
-      }
-      li {
-        min-width: 35vmin;
-        &:last-of-type,&:nth-of-type(2) { display: initial; }
-        &:first-of-type,&:last-of-type {
-          min-width: auto;
-          max-width: auto;
-        }
-        a { font-size: xx-large; }
-      }
-    }
-    &:last-of-type {
-      li:first-of-type { display: initial; }
-    }
-    li {
-      &:first-of-type { display: initial; }
-      display: none;
-    }
+  a {
+    font-size: xx-large;
+    margin-bottom: .5em;
   }
-  ul {
-    padding-left: 0;
-    li {
-      justify-self: center;
-      align-self: center;
-      a { font-size: xx-large; }
-      padding: 1em;
-    }
-  }
-}
-
-nav {
-  ul {
-    display: grid;
-    list-style: none;
-    padding-left: 0;
-    grid-auto-flow: column;
-  }
-
+  * { align-items: center; }
   li {
-    font-family: 'Font Awesome 5 Free';
-    font-size: var(--icon-size);
-    font-weight: 900;
-    width: 1.25em;
+    &[data-visible] { visibility: initial; }
+    visibility: hidden;
+    grid: {
+      row: 1;
+      column: 1;
+    }
   }
 }
+
+small::before { padding: .25em; }
+
+ul {
+  display: grid;
+  list-style: none;
+  padding-left: 0;
+  grid-auto-flow: column;
+}
+
 a {
   text-decoration: none;
   color: var(--color);
@@ -116,28 +156,37 @@ a {
     color: var(--hover-color);
   }
 }
+
+code {
+  background-color: var(--code-background);
+  color: var(--code-color);
+  font: {
+    weight: bold;
+    family: $code-font;
+  }
+}
+
 pre {
-  white-space: pre-line;
   text-align: left;
   code {
-    border-left: .5rem solid #2d6da3;
-    border-radius: 5px;
+    border: {
+      left: .5rem solid #2d6da3;
+      radius: 5px;
+    }
     box-shadow: 0 2px 5px 0 rgba(48, 55, 66, .5);
-    font-family: 'Fira Code', monospace;
-    font-weight: bold;
     line-height: 1.3em;
     overflow-x: auto;
     display: block;
     padding: 0.5em;
     margin: 0 auto;
-    background: var(--code-background);
-    color: var(--code-color);
+    background: var(--code-block-background);
+    color: var(--code-block-color);
 
     @each $element in function, builtin, literal, string, module, number {
-      #{$element} { color: var(--code-#{$element}); }
+      #{$element} { color: var(--code-block-#{$element}); }
     }
     var {
-      color: var(--code-var);
+      color: var(--code-block-var);
       font-style: normal;
     }
     mark {
@@ -146,7 +195,7 @@ pre {
         left: 5px;
         right: 5px;
       }
-      color: var(--code-color);
+      color: var(--code-block-color);
       background-color: var(--selection-color);
     }
   }
