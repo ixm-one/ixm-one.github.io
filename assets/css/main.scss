@@ -117,6 +117,19 @@ header {
   }
 }
 
+@keyframes slide-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  0% { transform: translateX(0); }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
 main {
   display: grid;
   grid: {
@@ -131,8 +144,11 @@ main {
   }
   * { align-items: center; }
   li {
-    &[data-visible] { visibility: initial; }
-    visibility: hidden;
+    &[data-visible] {
+      opacity: 1;
+      animation: slide-left 1s ease 0s forwards;
+    } 
+    animation: slide-right 1s ease 0s forwards;
     grid: {
       row: 1;
       column: 1;
@@ -143,6 +159,7 @@ main {
 small::before { padding: .25em; }
 
 ul {
+  overflow: hidden;
   display: grid;
   list-style: none;
   padding-left: 0;
