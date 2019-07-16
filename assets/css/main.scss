@@ -1,13 +1,11 @@
 ---
 ---
 
+@import 'palette';
+
 $text-font: 'Inter', sans-serif;
 $code-font: 'Fira Code', monospace;
 $icon-font: 'Font Awesome 5 Free';
-
-$black: #1b1f23;
-$black-85: rgba($black, .85);
-$black-75: rgba($black, .75);
 
 $green: #9ccc65;
 $blue: #61aeee;
@@ -20,32 +18,74 @@ $red: #f92672;
   }
 }
 
+@keyframes slide-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  0% { transform: translateX(0); }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
 :root {
-  --selection-color: #ffe9b4;
-  --hover-color: #{$black-85};
-  --color: #{$black-75};
+  --background-color: #{$gray-100};
+  --text-color: #{$gray-900};
+
+  --selection-color: #{$selection-light};
+
+  --link-color: #{$gray-700};
+  --link-hover-color: #{$gray-800};
+
+  --hover-color: #{$black-fade-85};
+  --color: #{$black-fade-75};
 
   --text-green: #{$green};
   --text-blue: #{$blue};
   --text-red: #{$red};
 
-  --code-background: #fcf2f2;
-  --code-color: #d73e48;
+  --code-background: #{$blue-800};
+  --code-color: #{$blue-300};
 
+  --code-block-shadow: #{$black-fade-50};
   --code-block-background: #282c34;
   --code-block-color: #abb2bf;
 
-  --code-block-function: #{$blue};
-  --code-block-builtin: #{$red};
-  --code-block-literal: #56b6c2;
-  --code-block-string: #{$green};
-  --code-block-module: #e6c07b;
-  --code-block-number: #d19a66;
-  --code-block-var: #b18eb1;
+  --code-block-blue: #{map-get($atom-dark, blue)};
+  --code-block-red: #{map-get($atom-dark, red)};
+  --code-block-cyan: #{map-get($atom-dark, cyan)};
+  --code-block-green: #{map-get($atom-dark, green)};
+  --code-block-yellow: #{map-get($atom-dark, yellow)};
+  --code-block-orange: #{map-get($atom-dark, brown)};
+  --code-block-purple: #{map-get($atom-dark, purple)};
 
   --icon-size: 27px;
   --icon-github: "\f09b";
   --icon-books: "\f02d";
+}
+
+[data-theme="dark"] {
+  --selection-color: #{$selection-dark};
+  --background-color: #{$gray-900};
+  --text-color: #{$gray-000};
+
+  --link-color: #{$gray-300};
+  --link-hover-color: #{$gray-100};
+
+  --code-block-shadow: #{$white-fade-50};
+  --code-block-background: #{map-get($atom-light, base)};
+  --code-block-color: #{map-get($atom-light, high)};
+
+  --code-block-blue: #{map-get($atom-light, blue)};
+  --code-block-red: #{map-get($atom-light, red)};
+  --code-block-cyan: #{map-get($atom-light, cyan)};
+  --code-block-green: #{map-get($atom-light, green)};
+  --code-block-yellow: #{map-get($atom-light, yellow)};
+  --code-block-orange: #{map-get($atom-light, orange)};
+  --code-block-purple: #{map-get($atom-light, purple)};
 }
 
 ::selection { background-color: var(--selection-color); }
@@ -60,6 +100,11 @@ $red: #f92672;
 }
 
 body {
+  a {
+    text-decoration: none;
+    color: var(--link-color);
+    &:hover { color: var(--link-hover-color); }
+  }
   grid: {
     column-gap: 20px;
     template: {
@@ -67,7 +112,8 @@ body {
     }
   }
   display: grid;
-  color: var(--color);
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-family: $text-font;
   & > * {
     grid-column: 1 / -1;
@@ -92,7 +138,6 @@ header {
       @include coord(3, 1);
     } 
   }
-  
   img {
     align-self: center;
     width: 54px;
@@ -114,19 +159,11 @@ header {
       font-size: var(--icon-size);
       width: 1.25em;
     }
-  }
-}
-
-@keyframes slide-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes slide-right {
-  0% { transform: translateX(0); }
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
+    span {
+      cursor: pointer;
+      color: var(--link-color);
+      &:hover { color: var(--link-hover-color); }
+   }
   }
 }
 
@@ -156,7 +193,17 @@ main {
   }
 }
 
-small::before { padding: .25em; }
+footer {
+  small {
+    font-size: xx-small;
+    &::before {
+      font-family: $icon-font;
+      font-weight: 400;
+      padding-right: .25em;
+      content: '\f1f9';
+    }
+  }
+}
 
 ul {
   overflow: hidden;
@@ -166,17 +213,12 @@ ul {
   grid-auto-flow: column;
 }
 
-a {
-  text-decoration: none;
-  color: var(--color);
-  &:hover {
-    color: var(--hover-color);
-  }
-}
-
 code {
   background-color: var(--code-background);
   color: var(--code-color);
+  padding: 0 0.25em;
+  line-height: 1.2em;
+  border-radius: 3px;
   font: {
     weight: bold;
     family: $code-font;
@@ -184,13 +226,16 @@ code {
 }
 
 pre {
+  *::selection {
+    background-color: $selection-light;
+  }
   text-align: left;
   code {
     border: {
       left: .5rem solid #2d6da3;
       radius: 5px;
     }
-    box-shadow: 0 2px 5px 0 rgba(48, 55, 66, .5);
+    box-shadow: 0 2px 5px 0 var(--code-block-shadow);
     line-height: 1.3em;
     overflow-x: auto;
     display: block;
@@ -199,21 +244,22 @@ pre {
     background: var(--code-block-background);
     color: var(--code-block-color);
 
-    @each $element in function, builtin, literal, string, module, number {
-      #{$element} { color: var(--code-block-#{$element}); }
-    }
+    function { color: var(--code-block-blue); }
+    builtin { color: var(--code-block-red); }
+    literal { color: var(--code-block-cyan); }
+    string { color: var(--code-block-green); }
+    module { color: var(--code-block-yellow); }
+    number { color: var(--code-block-orange); }
     var {
-      color: var(--code-block-var);
+      color: var(--code-block-purple);
       font-style: normal;
     }
+
     mark {
       border-radius: 3px;
-      padding: {
-        left: 5px;
-        right: 5px;
-      }
+      padding: 0 1px;
       color: var(--code-block-color);
-      background-color: var(--selection-color);
+      background-color: $selection-light;
     }
   }
 }

@@ -1,0 +1,65 @@
+// TODO: Need to create a common set of SCSS files for use in docs.ixm.one and ixm.one
+$atom-dark: (
+  base:   #282c34,
+  high:   #abb2bf,
+  med:    #818896,
+  low:    #5c6370,
+  cyan:   #56b6c2,
+  blue:   #61aeee,
+  purple: #c678dd,
+  green:  #9ccc65,
+  red:    #f92672,
+  orange: #be5046,
+  brown:  #d19a66,
+  yellow: #e6c07b
+);
+
+$atom-light: (
+  base:   #fafafa,
+  high:   #383a42,
+  med:    #686b77,
+  low:    #a0a1a7,
+  cyan:   #0184bb,
+  blue:   #4078f2,
+  purple: #a626a4,
+  green:  #50a14f,
+  orange: #e45649,
+  red:    #c91243,
+  brown:  #986801,
+  yellow: #c18401,
+);
+
+// Text Colors
+$selection-light: #ffe9b4;
+$selection-dark: #8189ae;
+
+$gray-000:#fafbfc;
+$gray-100:#f6f8fa;
+$gray-200:#e1e4e8;
+$gray-300:#d1d5da;
+$gray-400:#959da5;
+$gray-500:#51737d;
+$gray-600:#586069;
+$gray-700:#444d56;
+$gray-800:#2f363d;
+$gray-900:#24292e;
+
+$blue-000:#f1f8ff;
+$blue-100:#dbedff;
+$blue-200:#c8e1ff;
+$blue-300:#79b8ff;
+$blue-400:#2188ff;
+$blue-500:#0366d6;
+$blue-600:#005cc5;
+$blue-700:#044289;
+$blue-800:#032f62;
+$blue-900:#05264c;
+
+$black: #1b1f23;
+$white: #ffffff;
+
+$black-fade-85: rgba($black, .85);
+$black-fade-75: rgba($black, .75);
+$black-fade-50: rgba($black, .50);
+
+$white-fade-50: rgba($white, .50);

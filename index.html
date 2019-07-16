@@ -39,6 +39,9 @@
       <nav>
         <ul>
           <li>
+            <span class="fas fa-adjust" id="dark-mode" title="Dark Mode"></span>
+          </li>
+          <li>
             <a class="fab fa-github"
                rel="noopener noreferrer" target="_blank"
                href="https://github.com/ixm-one/ixm"
@@ -57,7 +60,7 @@
       </nav>
     </header>
     <main>
-        <a class="fas fa-chevron-circle-left" onclick="prev()"></a>
+        <a class="fas fa-chevron-circle-left" id="prev"></a>
         <ul>
           <li data-visible>
             <figure>
@@ -98,28 +101,13 @@
             </figure>
           </li>
         </ul>
-        <a class="fas fa-chevron-circle-right" onclick="next()"></a>
+        <a class="fas fa-chevron-circle-right" id="next"></a>
     </main>
     <footer>
       <a href="https://twitter.com/slurpsmadrips">
-        <small class="far fa-copyright">Isabella Muerte</small>
+        <small>Isabella Muerte</small>
       </a>
     </footer>
-    <script>
-      let current = 0;
-      function next () { switchTo(current += 1); }
-      function prev () { switchTo(current -= 1); }
-      function switchTo (idx) {
-        const slideSelector = 'main > ul > li';
-        let slides = Array.from(document.querySelectorAll(slideSelector));
-        if (idx < 0) { current = slides.length - 1; }
-        else if (idx >= slides.length) { current = 0; }
-        else { current = idx; }
-        const hide = (element) => { delete element.dataset['visible']; };
-        const show = (element) => { element.dataset['visible'] = true; }
-        slides.forEach(hide);
-        show(slides[current])
-      }
-    </script>
+    <script type="module" src="/assets/js/ixm.js"></script> 
   </body>
 </html>
