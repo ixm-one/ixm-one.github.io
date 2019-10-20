@@ -1,5 +1,5 @@
-<function>dict</function>(<literal>INSERT</literal> <var>my-dictionary</var> <var>key</var> <literal>APPEND</literal> <number>1</number> <string>"hello"</string>)
+<function>dict</function>(<literal>APPEND</literal> <var>my-dictionary</var> <var>key</var> <number>1</number> <string>"hello"</string>)
 <function>dict</function>(<literal>GET</literal> <var>my-dictionary</var> <var>key</var> <var>items</var>)
 <builtin>foreach</builtin>(<var>item</var> <literal>IN LISTS</literal> <var>items</var>)
-&nbsp;&nbsp;<builtin>message</builtin>(<literal>STATUS</literal> <string>"Got: <var>${item}</var>"</string>)
+&nbsp;&nbsp;<builtin>log</builtin>(<literal>INFO</literal> <string>"Got: <var>${item}</var>"</string>)
 <builtin>endforeach</builtin>()
